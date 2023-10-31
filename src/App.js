@@ -1,7 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
+import { isLoggedIn } from './util/loginsys';
+import Login from './components/Login';
 
 function App() {
+  if (!isLoggedIn()) {
+    return <Login />
+  }
   return (
     <div className="App">
       <header className="App-header">
