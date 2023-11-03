@@ -40,7 +40,7 @@ export default function ServerInfo () {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('pteroKey'),
           'Content-Type': 'application/json',
-        'Accept': 'application/json',
+          'Accept': 'application/json'
         }
       })
     })
@@ -71,7 +71,7 @@ export default function ServerInfo () {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('pteroKey'),
           'Content-Type': 'application/json',
-        'Accept': 'application/json',
+          'Accept': 'application/json'
         }
       })
     })
@@ -91,7 +91,7 @@ export default function ServerInfo () {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('pteroKey'),
           'Content-Type': 'application/json',
-        'Accept': 'application/json',
+          'Accept': 'application/json'
         }
       })
     })
