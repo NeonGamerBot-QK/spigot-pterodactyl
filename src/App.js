@@ -8,7 +8,7 @@ function App () {
   if (!isLoggedIn()) {
     return <Login />
   }
-  if (window.location.hash === "#addplugins") {
+  if (window.location.hash === '#addplugins') {
     return <AddPlugins />
   }
   return (
