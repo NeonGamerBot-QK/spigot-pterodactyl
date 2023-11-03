@@ -24,22 +24,76 @@ export default function ServerInfo () {
   })
   const restartServer = async () => {
     const id = new URL(window.location.href).searchParams.get('server')
-    await fetch(localStorage.getItem('pteroURL') + '/sanctum/csrf-cookie', { mode: 'cors'})
-    api.post(`/servers/${id}/power`, {
-      signal: 'restart'
-    }).then(console.log)
-    debugger
+    // await fetch(localStorage.getItem('pteroURL') + '/sanctum/csrf-cookie', { mode: 'no-cors'})
+    fetch(`http://localhost:3001/power`, {
+      method: 'POST',
+      headers: {
+        // 'X-CSRF-Token': localStorage.getItem('pteroCSRF'),
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'PanelUrl': localStorage.getItem('pteroURL') + '/api/client/servers/' + id + '/power'
+      },
+      body: JSON.stringify({
+        body: JSON.stringify({
+          signal: 'restart'
+        }),
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('pteroKey'),
+          'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        }
+      })
+    })
+    // api.post(`/servers/${id}/power`, {
+    //   signal: 'restart'
+    // }).then(console.log)
+    // debugger
     alert('Restarting server...')
     window.location.reload()
   }
   const reloadServer = async () => {
     const id = new URL(window.location.href).searchParams.get('server')
-    await api.post(`/servers/${id}/command`, {
-      command: 'reload'
+    // await api.post(`/servers/${id}/command`, {
+    //   command: 'reload'
+    // })
+    fetch(`http://localhost:3001/cmd`, {
+      method: 'POST',
+      headers: {
+        // 'X-CSRF-Token': localStorage.getItem('pteroCSRF'),
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'PanelUrl': localStorage.getItem('pteroURL') + '/api/client/servers/' + id + '/command'
+      },
+      body: JSON.stringify({
+        body: JSON.stringify({
+          command: 'reload'
+        }),
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('pteroKey'),
+          'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        }
+      })
     })
     if (!window.confirm('Are you sure you want to reload the server?')) return
-    api.post(`/servers/${id}/command`, {
-      command: 'reload confirm'
+    fetch(`http://localhost:3001/cmd`, {
+      method: 'POST',
+      headers: {
+        // 'X-CSRF-Token': localStorage.getItem('pteroCSRF'),
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'PanelUrl': localStorage.getItem('pteroURL') + '/api/client/servers/' + id + '/command'
+      },
+      body: JSON.stringify({
+        body: JSON.stringify({
+          command: 'reload confirm'
+        }),
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('pteroKey'),
+          'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        }
+      })
     })
     alert('Reloaded server!')
   }
