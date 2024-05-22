@@ -12,7 +12,6 @@ export const autoLogin = () => {
   }
   if (process.env.REACT_APP_PTERO_URL && !localStorage.getItem('pteroURL')) {
     // console.log('autlogin')
-
     localStorage.setItem('pteroURL', process.env.REACT_APP_PTERO_URL)
   }
   if (key && url) {

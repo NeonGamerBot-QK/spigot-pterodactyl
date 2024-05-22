@@ -25,77 +25,78 @@ export default function ServerInfo () {
   const restartServer = async () => {
     const id = new URL(window.location.href).searchParams.get('server')
     // await fetch(localStorage.getItem('pteroURL') + '/sanctum/csrf-cookie', { mode: 'no-cors'})
-    fetch(`http://localhost:3001/power`, {
-      method: 'POST',
-      headers: {
-        // 'X-CSRF-Token': localStorage.getItem('pteroCSRF'),
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'PanelUrl': localStorage.getItem('pteroURL') + '/api/client/servers/' + id + '/power'
-      },
-      body: JSON.stringify({
-        body: JSON.stringify({
-          signal: 'restart'
-        }),
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('pteroKey'),
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      })
-    })
-    // api.post(`/servers/${id}/power`, {
-    //   signal: 'restart'
-    // }).then(console.log)
+    // fetch(`http://localhost:3001/power`, {
+    //   method: 'POST',
+    //   headers: {
+    //     // 'X-CSRF-Token': localStorage.getItem('pteroCSRF'),
+    //     'Content-Type': 'application/json',
+    //     'Accept': 'application/json',
+    //     'PanelUrl': localStorage.getItem('pteroURL') + '/api/client/servers/' + id + '/power'
+    //   },
+    //   body: JSON.stringify({
+    //     body: JSON.stringify({
+    //       signal: 'restart'
+    //     }),
+    //     headers: {
+    //       Authorization: 'Bearer ' + localStorage.getItem('pteroKey'),
+    //       'Content-Type': 'application/json',
+    //       'Accept': 'application/json'
+    //     }
+    //   })
+    // })
+    
+    api.post(`/servers/${id}/power`, {
+      signal: 'restart'
+    }).then(console.log)
     // debugger
     alert('Restarting server...')
-    window.location.reload()
+    // window.location.reload()
   }
   const reloadServer = async () => {
     const id = new URL(window.location.href).searchParams.get('server')
     // await api.post(`/servers/${id}/command`, {
     //   command: 'reload'
     // })
-    fetch(`http://localhost:3001/cmd`, {
-      method: 'POST',
-      headers: {
-        // 'X-CSRF-Token': localStorage.getItem('pteroCSRF'),
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'PanelUrl': localStorage.getItem('pteroURL') + '/api/client/servers/' + id + '/command'
-      },
-      body: JSON.stringify({
-        body: JSON.stringify({
-          command: 'reload'
-        }),
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('pteroKey'),
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      })
-    })
-    if (!window.confirm('Are you sure you want to reload the server?')) return
-    fetch(`http://localhost:3001/cmd`, {
-      method: 'POST',
-      headers: {
-        // 'X-CSRF-Token': localStorage.getItem('pteroCSRF'),
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'PanelUrl': localStorage.getItem('pteroURL') + '/api/client/servers/' + id + '/command'
-      },
-      body: JSON.stringify({
-        body: JSON.stringify({
-          command: 'reload confirm'
-        }),
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('pteroKey'),
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      })
-    })
-    alert('Reloaded server!')
+    // fetch(`http://localhost:3001/cmd`, {
+    //   method: 'POST',
+    //   headers: {
+    //     // 'X-CSRF-Token': localStorage.getItem('pteroCSRF'),
+    //     'Content-Type': 'application/json',
+    //     'Accept': 'application/json',
+    //     'PanelUrl': localStorage.getItem('pteroURL') + '/api/client/servers/' + id + '/command'
+    //   },
+    //   body: JSON.stringify({
+    //     body: JSON.stringify({
+    //       command: 'reload'
+    //     }),
+    //     headers: {
+    //       Authorization: 'Bearer ' + localStorage.getItem('pteroKey'),
+    //       'Content-Type': 'application/json',
+    //       'Accept': 'application/json'
+    //     }
+    //   })
+    // })
+    // if (!window.confirm('Are you sure you want to reload the server?')) return
+    // fetch(`http://localhost:3001/cmd`, {
+    //   method: 'POST',
+    //   headers: {
+    //     // 'X-CSRF-Token': localStorage.getItem('pteroCSRF'),
+    //     'Content-Type': 'application/json',
+    //     'Accept': 'application/json',
+    //     'PanelUrl': localStorage.getItem('pteroURL') + '/api/client/servers/' + id + '/command'
+    //   },
+    //   body: JSON.stringify({
+    //     body: JSON.stringify({
+    //       command: 'reload confirm'
+    //     }),
+    //     headers: {
+    //       Authorization: 'Bearer ' + localStorage.getItem('pteroKey'),
+    //       'Content-Type': 'application/json',
+    //       'Accept': 'application/json'
+    //     }
+    //   })
+    // })
+    // alert('Reloaded server!')
   }
 
   return <div>
@@ -111,7 +112,10 @@ export default function ServerInfo () {
     </div>
     <div className='p-5 m-5 rounded-lg shadow-xl'>
       <button className='m-5 btn btn-primary' onClick={restartServer} >Restart</button>
-      <button className='m-5 btn btn-primary' onClick={() => window.location.href = '#addplugins'}>Add Plugins</button>
+      <button className='m-5 btn btn-primary' onClick={() => {
+        window.location.href = '#addplugins'
+        window.location.reload()
+        }}>Add Plugins</button>
       <button className='m-5 btn focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900' onClick={reloadServer}>Reload</button>
     </div>
 

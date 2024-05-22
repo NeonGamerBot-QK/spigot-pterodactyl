@@ -5,9 +5,9 @@ axios.defaults.withCredentials = true
 const api = axios.create({
   baseURL: d.url + '/api/client',
   headers: {
-    Authorization: 'Bearer ' + d.key
+    Authorization: 'Bearer ' + d.key,
         // cookie: 'eeee',
-        // "Cache-Control": "no-cache",
+         "Cache-Control": "no-cache",
         // "Cookie": document.cookie
   },
   withCredentials: true
