@@ -7,7 +7,7 @@ const api = axios.create({
   headers: {
     Authorization: 'Bearer ' + d.key,
         // cookie: 'eeee',
-         "Cache-Control": "no-cache",
+    'Cache-Control': 'no-cache'
         // "Cookie": document.cookie
   },
   withCredentials: true
