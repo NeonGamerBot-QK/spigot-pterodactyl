@@ -1,3 +1,4 @@
+import catppuccin from '@catppuccin/daisyui'
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -6,6 +7,9 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [require('daisyui')],
+  daisyui: {
+    themes: [,  catppuccin("mocha", { primary: 'mauve', secondary: 'sky' })]
+  },
+  plugins: [require('daisyui'),require("@catppuccin/tailwindcss")({ defaultFlavor: "mocha" })],
 }
 

@@ -36,7 +36,7 @@ export default function AddPlugins () {
             console.log(s)
             return <div className='m-2 transition duration-500 ease-in-out transform shadow-xl card bg-base-100 hover:-translate-y-1 lg:hover:scale-110 hover:scale-105' key={i}>
               <img src={`data:image/jpg;base64,${s.icon.data}`} alt='' />
-              <h2 className='card-title'>{s.name}</h2>
+              <h2 className='card-title m-2'>{s.name}</h2>
               <p className='card-body'>{s.tag}</p>
               <div className='flex-1'>
                 <button className='btn btn-primary' onClick={() => {

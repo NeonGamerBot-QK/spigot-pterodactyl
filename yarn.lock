@@ -1152,6 +1152,16 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@catppuccin/daisyui@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@catppuccin/daisyui/-/daisyui-1.1.1.tgz#471292dc472e0a5eed0d7dfaf5b7335c28d3d830"
+  integrity sha512-Ytpt9bLoWZFm9ysrK6KAS0fWyx6E3pS4j/DzLfsUq+JkPptxtH9vYwCNrNkRpZQOTpU0TJUtsG3JYtFV6mXhzA==
+
+"@catppuccin/tailwindcss@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@catppuccin/tailwindcss/-/tailwindcss-0.1.6.tgz#d97c491e1523ead83009e32d0a34c364c2a0ca5b"
+  integrity sha512-V+Y0AwZ5SSyvOVAcDl7Ng30xy+m82OKnEJ+9+kcZZ7lRyXuZrAb2GScdq9XR3v+ggt8qiZ/G4TvaC9cJ88AAXA==
+
 "@csstools/normalize.css@*":
   version "12.0.0"
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-12.0.0.tgz#a9583a75c3f150667771f30b60d9f059473e62c4"

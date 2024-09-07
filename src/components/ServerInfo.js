@@ -4,18 +4,26 @@ import { isLoggedIn } from '../util/loginsys'
 
 export default function ServerInfo () {
   const [server, setServer] = useState({})
+  const [errored, setErrored] = useState(false);
   const [jars, setJars] = useState([])
   useEffect(() => {
     if (isLoggedIn() && (!window.lastRequest || Date.now() - window.lastRequest > 2500)) {
       window.lastRequest = Date.now()
       const id = new URL(window.location.href).searchParams.get('server')
+      try {
       getServer(id).then((r) => {
         setServer(r)
         api.get(`/servers/${id}/files/list?directory=/plugins`).then(r => {
         // console.log(r)
           setJars(r.data.data.filter(e => e.attributes.mimetype === 'application/jar'))
+        }).catch(e => {
+          setErrored(true)
         })
       })
+    } catch (e) {
+      // setJars([{ attributes: { name: "ERR:! SERVER BROKEN!!" }}])
+    setErrored(true)
+    }
     } else {
       if (!window.lastRequest) {
         window.lastRequest = Date.now()
@@ -104,19 +112,21 @@ export default function ServerInfo () {
     <p>{server.description}</p>
     <div className='p-5 m-5 rounded-lg shadow-xl'>
       <h2 className='text-2xl font-bold'>Plugins</h2>
-      <ul>
+     {errored ? <>
+     <p className='text-red-500'>There was an error getting plugins, check console.</p>
+     </>:  <ul>
         {jars.map((j, i) => {
           return <li key={i}><pre>{j.attributes.name.replace('.jar', '')}</pre></li>
         })}
-      </ul>
+      </ul>}
     </div>
     <div className='p-5 m-5 rounded-lg shadow-xl'>
-      <button className='m-5 btn btn-primary' onClick={restartServer} >Restart</button>
-      <button className='m-5 btn btn-primary' onClick={() => {
+      <button className='m-5 btn btn-primary' disabled={errored} onClick={restartServer} >Restart</button>
+      <button className='m-5 btn btn-primary' disabled={errored} onClick={() => {
         window.location.href = '#addplugins'
         window.location.reload()
       }}>Add Plugins</button>
-      <button className='m-5 btn focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900' onClick={reloadServer}>Reload</button>
+      <button  disabled={errored} className='m-5 btn focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900' onClick={reloadServer}>Reload</button>
     </div>
 
   </div>
